@@ -1,0 +1,32 @@
+<header>
+  <mat-toolbar color="primary">
+    <a
+      mat-stroked-button
+      routerLinkActive="active"
+      routerLink="users"
+      class="nav-link"
+      >Users</a
+    >
+    <a mat-stroked-button routerLinkActive="active" routerLink="photos"
+      >Photos</a
+    >
+  </mat-toolbar>
+</header>
+<main class="content" cdkDropListGroup>
+  <aside class="sidebar">
+    <router-outlet></router-outlet>
+  </aside>
+  <section class="details">
+    <router-outlet
+      (activate)="isButtonVisible = true"
+      (deactivate)="isButtonVisible = false"
+      name="details"
+    ></router-outlet>
+    <a
+      mat-button
+      *ngIf="isButtonVisible"
+      [routerLink]="['', { outlets: { details: null } }]"
+      >close</a
+    >
+  </section>
+</main>

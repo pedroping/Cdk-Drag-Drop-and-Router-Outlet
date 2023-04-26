@@ -1,15 +1,15 @@
-import { Photo } from "./../photos/photo";
-import { CdkDragDrop, transferArrayItem } from "@angular/cdk/drag-drop";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { Photo } from './../photos/photo';
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
   HostBinding,
-} from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { pluck, switchMap } from "rxjs/operators";
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { pluck, switchMap } from 'rxjs/operators';
 
 interface UserDetails {
   id: number;
@@ -18,7 +18,7 @@ interface UserDetails {
 }
 
 @Component({
-  selector: "app-user-details",
+  selector: 'app-user-details',
   template: `
     <h1>User Details</h1>
     <section *ngIf="user$ | async as user">
@@ -58,7 +58,7 @@ interface UserDetails {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetailsComponent implements OnInit {
-  @HostBinding("class.mat-elevation-z2") hostCls = true;
+  @HostBinding('class.mat-elevation-z2') hostCls = true;
   user$!: Observable<UserDetails>;
   photos: Photo[] = [];
   constructor(
@@ -68,7 +68,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.activatedRoute.params.pipe(
-      pluck("id"),
+      pluck('id'),
       switchMap((id) =>
         this.http.get<UserDetails>(
           `https://jsonplaceholder.typicode.com/users/${id}`
@@ -84,6 +84,6 @@ export class UserDetailsComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
-    console.log(event);
+    console.log('drop', event);
   }
 }

@@ -15,6 +15,7 @@ interface UserDetails {
   id: number;
   email: string;
   name: string;
+  photos: Photo[];
 }
 
 @Component({
@@ -27,6 +28,7 @@ interface UserDetails {
       <p class="mat-caption">User Id: {{ user.id }}</p>
     </section>
     <ul
+      *ngIf="user$ | async as user"
       class="drop-area"
       cdkDropList
       [cdkDropListData]="photos"

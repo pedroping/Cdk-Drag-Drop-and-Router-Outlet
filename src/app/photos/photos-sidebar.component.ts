@@ -8,7 +8,7 @@ import { CdkDragDrop, transferArrayItem } from "@angular/cdk/drag-drop";
   selector: "app-photos-sidebar",
   template: `
     <ul
-      *ngIf="photos$ | async as photos"
+      *ngIf="copiedPhotos$ | async as photos"
       cdkDropList
       [cdkDropListData]="photos"
       (cdkDropListDropped)="drop($event)"
@@ -34,11 +34,11 @@ import { CdkDragDrop, transferArrayItem } from "@angular/cdk/drag-drop";
 })
 export class PhotosSidebarComponent implements OnInit {
   photos$!: Observable<Photo[]>;
-
+  copiedPhotos$!: Observable<Photo[]>;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.photos$ = this.http.get<Photo[]>(
+    this.copiedPhotos$ = this.photos$ = this.http.get<Photo[]>(
       `https://jsonplaceholder.typicode.com/photos?_limit=5`
     );
   }
